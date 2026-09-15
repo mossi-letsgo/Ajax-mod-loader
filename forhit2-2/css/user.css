@@ -1,0 +1,182 @@
+/* --- Page Header & Search --- */
+.page-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.search-box {
+    margin-bottom: 25px;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 16px;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    font-size: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+/* --- File Grid System --- */
+.file-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+/* --- ปรับแต่ง Card แสดงรายการไฟล์ --- */
+.file-card {
+    background-color: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.file-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.file-card h3 {
+    color: #0f172a;
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+}
+
+.file-card p {
+    color: #475569;
+    font-size: 0.95rem;
+}
+
+/* --- File Detail & Versions Section --- */
+.file-detail-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+}
+
+.version-section, .comment-section {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 25px;
+}
+
+.version-section h2, .comment-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+}
+
+.version-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.version-item:last-child {
+    border-bottom: none;
+}
+
+.btn-download {
+    background-color: #10b981;
+    color: white;
+    padding: 6px 14px;
+    border-radius: var(--radius);
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.btn-download:hover {
+    background-color: #059669;
+}
+
+/* --- Comment System --- */
+.comment-form textarea {
+    min-height: 80px;
+    margin-bottom: 10px;
+    resize: vertical;
+}
+
+.login-prompt {
+    background-color: #eff6ff;
+    border: 1px solid #bfdbfe;
+    color: #1e40af;
+    padding: 15px;
+    border-radius: var(--radius);
+    text-align: center;
+}
+
+.comments-list {
+    margin-top: 20px;
+}
+
+.comment-item {
+    padding: 12px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.comment-item strong {
+    color: var(--primary-color);
+    font-size: 0.95rem;
+}
+
+.comment-item p {
+    margin-top: 4px;
+    font-size: 0.9rem;
+}
+
+/* ==========================================
+   Responsive Files Grid for Mobile
+   ========================================== */
+
+/* ปรับระบบ Grid รายการไฟล์ */
+#file-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 600px) {
+    #file-list {
+        grid-template-columns: 1fr; /* บนมือถือให้แสดง 1 คอลัมน์เต็มจอ */
+    }
+
+    .file-card {
+        padding: 16px;
+    }
+
+    .file-card h3 {
+        font-size: 1.1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+
+    /* ปรับป้าย Badge บนมือถือให้อยู่บรรทัดใหม่ ไม่ล้นจอ */
+    .file-card h3 span {
+        margin-left: 0 !important;
+        margin-top: 4px;
+    }
+
+    .file-card a.btn-primary {
+        width: 100%;
+        margin-top: 12px;
+    }
+}

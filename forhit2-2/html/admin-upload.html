@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผงควบคุม Admin - จัดการลิงก์ไฟล์</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <nav class="navbar admin-nav">
+        <div class="logo"><a href="../index.html">FileHub (Admin Mode)</a></div>
+        <div class="nav-links">
+            <a href="../index.html">กลับหน้าหลัก</a>
+            <button id="btn-logout" type="button" class="btn-danger-outline">ออกจากระบบ</button>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h1>จัดการลิงก์ดาวน์โหลดไฟล์</h1>
+
+        <!-- Form 1: เพิ่มไฟล์ใหม่ -->
+        <div class="admin-card">
+            <h2>1. เพิ่มรายการไฟล์ใหม่ (New File)</h2>
+            <form id="upload-new-file-form">
+                <div class="form-group">
+                    <label for="file-title">ชื่อไฟล์ / ชื่อโปรแกรม</label>
+                    <input type="text" id="file-title" required placeholder="เช่น โปรแกรมตัดต่อ V1">
+                </div>
+                <div class="form-group">
+                    <label for="file-desc">รายละเอียดไฟล์</label>
+                    <textarea id="file-desc" placeholder="อธิบายรายละเอียดเกี่ยวกับไฟล์นี้..."></textarea>
+                </div>
+
+                <!-- เพิ่มตัวเลือกสถานะไฟล์ -->
+                <div class="form-group">
+                    <label for="file-status">สถานะไฟล์ / การปล่อยอัปเดต</label>
+                    <select id="file-status">
+                        <option value="new">🔥 อัปเดตใหม่ล่าสุด (New Update)</option>
+                        <option value="normal" selected>✅ ปล่อยดาวน์โหลดปกติ (Normal)</option>
+                        <option value="maintenance">🛠️ กำลังอัปเดต / ปิดปรับปรุง (Maintenance)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="version-num">หมายเลขเวอร์ชันแรก</label>
+                    <input type="text" id="version-num" value="v1.0.0" required placeholder="เช่น v1.0.0">
+                </div>
+                <div class="form-group">
+                    <label for="file-url">ลิงก์ดาวน์โหลดไฟล์ (Google Drive, Mega ฯลฯ)</label>
+                    <input type="url" id="file-url" required placeholder="https://drive.google.com/file/d/...">
+                </div>
+                <button type="submit" id="btn-upload" class="btn-primary">บันทึกข้อมูลไฟล์</button>
+            </form>
+        </div>
+
+        <!-- Form 2: เพิ่ม Version ใหม่ให้กับไฟล์ที่มีอยู่ -->
+        <div class="admin-card">
+            <h2>2. เพิ่มเวอร์ชันใหม่ให้ไฟล์เดิม (Add New Version)</h2>
+            <form id="add-version-form">
+                <div class="form-group">
+                    <label for="select-file">เลือกไฟล์ที่ต้องการอัปเดต</label>
+                    <select id="select-file" required>
+                        <option value="">-- กำลังโหลดรายการไฟล์ --</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="new-version-num">หมายเลขเวอร์ชันใหม่</label>
+                    <input type="text" id="new-version-num" placeholder="เช่น v1.0.1" required>
+                </div>
+                <div class="form-group">
+                    <label for="new-file-url">ลิงก์ดาวน์โหลดเวอร์ชันใหม่</label>
+                    <input type="url" id="new-file-url" placeholder="https://drive.google.com/file/d/..." required>
+                </div>
+                <button type="submit" id="btn-add-version" class="btn-primary">เพิ่มเวอร์ชันใหม่</button>
+            </form>
+        </div>
+    </main>
+
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/auth.js"></script>
+    <script type="module" src="../js/upload.js"></script>
+</body>
+</html>

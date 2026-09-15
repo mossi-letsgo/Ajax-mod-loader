@@ -1,0 +1,366 @@
+/* --- Reset & Global Variables --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-color: #ff00d4;
+    --primary-hover: #d000ad;
+    --danger-color: #ef4444;
+    --danger-hover: #dc2626;
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.85); /* เปลี่ยนเป็นขาวโปร่งแสง */
+    --text-color: #000000; /* เข้มขึ้นเพื่อให้มองเห็นชัด */
+    --text-muted: #334155; /* ปรับให้เทาเข้มอ่านง่ายขึ้น */
+    --border-color: rgba(225, 232, 240, 0.8);
+    --radius: 12px;
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+/* --- Background Image with Blur Effect --- */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ชั้นภาพพื้นหลังเบลอ */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://media.discordapp.net/attachments/1547970462435246090/1548698557991755797/2026-09-13_21.14.52.png?ex=6aa9fbad&is=6aa8aa2d&hm=622245f900c23402b588acdee5eca9d1de11c21364dd66c1b08830765b968739&=&format=webp&quality=lossless&width=1280&height=720'); 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    filter: blur(10px);
+    transform: scale(1.1);
+    z-index: -2;
+}
+
+/* เลเยอร์เงามืดโปร่งแสง (ปรับเพิ่มเข้มขึ้นเล็กน้อยให้ตัวหนังสือลอยเด่น) */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.35); /* เพิ่มเป็น 0.35 เพื่อช่วยดันตัวหนังสือขึ้นมา */
+    z-index: -1;
+}
+
+/* --- Container & Navbar (ปรับปรุงความคมชัด) --- */
+.container {
+    max-width: 1000px;
+    margin: 30px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.75); /* แผ่นรองกระจกฝ้าสำหรับเนื้อหาหลัก */
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 1px solid rgba(196, 196, 196, 0.4);
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9); /* Navbar ทึบขึ้นเพื่ออ่านชื่อผู้ใช้ชัดเจน */
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    text-decoration: none;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 600;
+}
+
+/* --- Page Header & Search Input --- */
+.page-header h1 {
+    color: #0f172a;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.page-header p {
+    color: #334155;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* ช่องค้นหาให้อ่านง่ายขึ้น */
+.search-box input,
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    border-radius: var(--radius);
+    outline: none;
+    font-size: 1rem;
+    background: rgba(255, 255, 255, 0.95);
+    color: #0f172a;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.search-box input::placeholder {
+    color: #64748b;
+}
+
+.search-box input:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+    border-color: var(--primary-color);
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(255, 0, 212, 0.2);
+}
+
+/* ข้อความแจ้งเตือน "ไม่พบรายการไฟล์" ให้เด่นชัด */
+#file-list p {
+    text-align: center;
+    color: #ff0000 !important;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 40px 0;
+}
+
+/* --- Buttons --- */
+.btn-primary {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s;
+    box-shadow: 0 4px 10px rgba(255, 0, 212, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #e2e8f0;
+    color: #1e293b;
+    border: none;
+    padding: 8px 16px;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background-color: #cbd5e1;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-back {
+    display: inline-block;
+    margin-bottom: 20px;
+    color: var(--text-color);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+/* --- Authentication Pages (Login/Register/Profile) --- */
+.auth-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.auth-card {
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(16px);
+    padding: 35px;
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.auth-card h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0f172a;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #334155;
+}
+
+.error-message {
+    color: var(--danger-color);
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.auth-footer a {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* --- Google Sign-In Button --- */
+.social-login {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.divider-text {
+    position: relative;
+    margin: 15px 0;
+    color: #475569;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.btn-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #1e293b;
+    border: 1px solid #cbd5e1;
+    padding: 10px;
+    border-radius: var(--radius);
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-google:hover {
+    background-color: #f8fafc;
+}
+
+/* ==========================================
+   Responsive Design for Mobile & Tablet
+   ========================================== */
+
+/* หน้าจอขนาดใหญ่ (Tablet แนวตั้ง / มือถือแนวนอน) - ไม่เกิน 768px */
+@media screen and (max-width: 768px) {
+    /* Navbar สลับเป็นแนวตั้ง */
+    .navbar {
+        flex-direction: column;
+        gap: 12px;
+        padding: 12px 16px;
+        text-align: center;
+    }
+
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* ปรับ Container ให้เต็มจอมากขึ้นบนมือถือ */
+    .container {
+        width: 95%;
+        margin: 15px auto;
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    /* ปรับขนาดหัวข้อ */
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .page-header p {
+        font-size: 0.9rem;
+    }
+
+    /* กล่องเข้าสู่ระบบ/สมัครสมาชิก */
+    .auth-card {
+        width: 90%;
+        padding: 24px 18px;
+    }
+}
+
+/* หน้าจอมือถือทั่วไป และมือถือขนาดเล็ก - ไม่เกิน 480px */
+@media screen and (max-width: 480px) {
+    .navbar {
+        padding: 10px 12px;
+    }
+
+    .logo a {
+        font-size: 1.25rem;
+    }
+
+    .nav-links {
+        font-size: 0.85rem;
+    }
+
+    /* ปรับรูป Profile ให้มีขนาดพอดีกับแถบ */
+    .nav-links img {
+        width: 32px !important;
+        height: 32px !important;
+    }
+
+    /* ปรับปุ่มต่าง ๆ ให้กดด้วยนิ้วได้ง่ายขึ้น */
+    .btn-primary, .btn-secondary, .btn-google {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+
+    .search-box input {
+        padding: 10px 14px;
+        font-size: 0.9rem;
+    }
+}

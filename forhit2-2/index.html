@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AJAX MODLOADER | จุดบริการมอดทุกเกม</title>
+    <!-- แก้ไข Path ของ CSS (ตัด ../ ออก) -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/user.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">Ajax Mod Downloader</a></div>
+        <div class="nav-links" id="nav-links">
+            <!-- แก้ไข Path ของ HTML (ลบตัว ้ และ ../ ออก) -->
+            <a href="html/login.html" id="btn-login">เข้าสู่ระบบ</a>
+            <a href="html/register.html" id="btn-register">สมัครสมาชิก</a>
+        </div>
+    </nav>
+
+    <main class="container">
+        <header class="page-header">
+            <h1>รายการไฟล์ดาวน์โหลดทั้งหมด</h1>
+            <p>ค้นหาและดาวน์โหลดไฟล์เวอร์ชันล่าสุดได้ฟรี</p>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-box">
+            <input type="text" id="search-input" placeholder="ค้นหาชื่อไฟล์...">
+        </div>
+
+        <!-- File List Container -->
+        <div class="file-grid" id="file-list">
+            <p class="loading-text">กำลังโหลดรายการไฟล์...</p>
+        </div>
+    </main>
+
+    <!-- Firebase & JS Scripts (แก้ไข Path ตัด ../ ออก) -->
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/auth.js"></script>
+    <script type="module" src="js/files.js"></script>
+</body>
+</html>

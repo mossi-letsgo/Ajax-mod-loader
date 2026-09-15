@@ -1,0 +1,41 @@
+/* --- Admin Specific Style --- */
+.admin-nav {
+    border-bottom: 3px solid #d400ff;
+}
+
+.btn-danger-outline {
+    background: transparent;
+    color: var(--danger-color);
+    border: 1px solid var(--danger-color);
+    padding: 6px 12px;
+    border-radius: var(--radius);
+    cursor: pointer;
+}
+
+.btn-danger-outline:hover {
+    background-color: var(--danger-color);
+    color: #fff;
+}
+
+.admin-card {
+    background: var(--card-bg);
+    padding: 25px;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    margin-top: 20px;
+    border-left: 5px solid var(--primary-color);
+}
+
+.admin-card h2 {
+    font-size: 1.25rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+/* Style สำหรับ File Input */
+input[type="file"] {
+    background-color: #f1f5f9;
+    padding: 8px;
+    border: 1px dashed var(--border-color);
+    cursor: pointer;
+}

@@ -3,82 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>แผงควบคุม Admin - จัดการลิงก์ไฟล์</title>
+    <title>รายละเอียดไฟล์ | AJAX MODLOADER </title>
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="../css/user.css">
 </head>
 <body>
-    <nav class="navbar admin-nav">
-        <div class="logo"><a href="../index.html">FileHub (Admin Mode)</a></div>
-        <div class="nav-links">
-            <a href="../index.html">กลับหน้าหลัก</a>
-            <button id="btn-logout" type="button" class="btn-danger-outline">ออกจากระบบ</button>
+    <nav class="navbar">
+        <div class="logo"><a href="../index.html">FileHub</a></div>
+        <div class="nav-links" id="nav-links">
+            <a href="login.html" id="btn-login">เข้าสู่ระบบ</a>
+            <a href="register.html" id="btn-register">สมัครสมาชิก</a>
         </div>
     </nav>
 
     <main class="container">
-        <h1>จัดการลิงก์ดาวน์โหลดไฟล์</h1>
+        <a href="../index.html" class="btn-back">&larr; กลับหน้าหลัก</a>
 
-        <!-- Form 1: เพิ่มไฟล์ใหม่ -->
-        <div class="admin-card">
-            <h2>1. เพิ่มรายการไฟล์ใหม่ (New File)</h2>
-            <form id="upload-new-file-form">
-                <div class="form-group">
-                    <label for="file-title">ชื่อไฟล์ / ชื่อโปรแกรม</label>
-                    <input type="text" id="file-title" required placeholder="เช่น โปรแกรมตัดต่อ V1">
-                </div>
-                <div class="form-group">
-                    <label for="file-desc">รายละเอียดไฟล์</label>
-                    <textarea id="file-desc" placeholder="อธิบายรายละเอียดเกี่ยวกับไฟล์นี้..."></textarea>
-                </div>
-
-                <!-- เพิ่มตัวเลือกสถานะไฟล์ -->
-                <div class="form-group">
-                    <label for="file-status">สถานะไฟล์ / การปล่อยอัปเดต</label>
-                    <select id="file-status">
-                        <option value="new">🔥 อัปเดตใหม่ล่าสุด (New Update)</option>
-                        <option value="normal" selected>✅ ปล่อยดาวน์โหลดปกติ (Normal)</option>
-                        <option value="maintenance">🛠️ กำลังอัปเดต / ปิดปรับปรุง (Maintenance)</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="version-num">หมายเลขเวอร์ชันแรก</label>
-                    <input type="text" id="version-num" value="v1.0.0" required placeholder="เช่น v1.0.0">
-                </div>
-                <div class="form-group">
-                    <label for="file-url">ลิงก์ดาวน์โหลดไฟล์ (Google Drive, Mega ฯลฯ)</label>
-                    <input type="url" id="file-url" required placeholder="https://drive.google.com/file/d/...">
-                </div>
-                <button type="submit" id="btn-upload" class="btn-primary">บันทึกข้อมูลไฟล์</button>
-            </form>
+        <!-- File Detail Info -->
+        <div class="file-detail-card" id="file-detail">
+            <h1 id="file-title">กำลังโหลด...</h1>
+            <p id="file-description"></p>
+            <span class="upload-date" id="file-date"></span>
         </div>
 
-        <!-- Form 2: เพิ่ม Version ใหม่ให้กับไฟล์ที่มีอยู่ -->
-        <div class="admin-card">
-            <h2>2. เพิ่มเวอร์ชันใหม่ให้ไฟล์เดิม (Add New Version)</h2>
-            <form id="add-version-form">
-                <div class="form-group">
-                    <label for="select-file">เลือกไฟล์ที่ต้องการอัปเดต</label>
-                    <select id="select-file" required>
-                        <option value="">-- กำลังโหลดรายการไฟล์ --</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="new-version-num">หมายเลขเวอร์ชันใหม่</label>
-                    <input type="text" id="new-version-num" placeholder="เช่น v1.0.1" required>
-                </div>
-                <div class="form-group">
-                    <label for="new-file-url">ลิงก์ดาวน์โหลดเวอร์ชันใหม่</label>
-                    <input type="url" id="new-file-url" placeholder="https://drive.google.com/file/d/..." required>
-                </div>
-                <button type="submit" id="btn-add-version" class="btn-primary">เพิ่มเวอร์ชันใหม่</button>
-            </form>
-        </div>
+        <!-- Versions Section -->
+        <section class="version-section">
+            <h2>เวอร์ชันทั้งหมด (Versions)</h2>
+            <div id="version-list" class="version-list">
+                <!-- รายการ Version ดึงผ่าน JS -->
+            </div>
+        </section>
+
+        <!-- Comments Section -->
+        <section class="comment-section">
+            <h2>ความคิดเห็น (Comments)</h2>
+
+            <!-- ฟอร์มส่ง Comment (ปรับปรุงโครงสร้าง UI) -->
+            <div id="comment-form-container">
+                <form id="comment-form" class="comment-form">
+                    <textarea id="comment-input" class="comment-textarea" placeholder="พิมพ์ความคิดเห็นของคุณที่นี่..." required></textarea>
+                    <div class="comment-form-footer">
+                        <button type="submit" class="btn-submit-comment">ส่งความคิดเห็น</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- ข้อความแจ้งเตือนให้ Login -->
+            <div id="login-prompt" class="login-prompt" style="display: none;">
+                <p>กรุณา <a href="login.html">เข้าสู่ระบบ</a> หรือ <a href="register.html">สมัครสมาชิก</a> เพื่อแสดงความคิดเห็น</p>
+            </div>
+
+            <!-- รายการ Comment ทั้งหมด -->
+            <div id="comments-list" class="comments-list">
+                <!-- โหลด Comment ผ่าน comments.js -->
+            </div>
+        </section>
+        
     </main>
 
     <script type="module" src="../js/firebase-config.js"></script>
     <script type="module" src="../js/auth.js"></script>
-    <script type="module" src="../js/upload.js"></script>
+    <script type="module" src="../js/files.js"></script>
+    <script type="module" src="../js/comments.js"></script>
 </body>
 </html>

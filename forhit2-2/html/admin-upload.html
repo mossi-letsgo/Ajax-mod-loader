@@ -18,7 +18,7 @@
     </nav>
 
     <main class="container">
-        <h1 style="margin-bottom: 24px; color: #0f172a;">แผงควบคุมอัปโหลดไฟล์</h1>
+        <h1 style="margin-bottom: 24px; color: #0f172a;">แผงควบคุมอัปโหลดและจัดการระบบ</h1>
 
         <!-- Form 1: เพิ่มไฟล์ใหม่ -->
         <div class="admin-card">
@@ -85,10 +85,130 @@
                 </div>
             </form>
         </div>
+
+        <!-- Form 3: จัดการรายการไฟล์และเวอร์ชัน -->
+        <div class="admin-card" style="margin-top: 30px;">
+            <h2>3. จัดการรายการไฟล์และเวอร์ชัน (Manage Files & Versions)</h2>
+            
+            <div style="overflow-x: auto;">
+                <table class="admin-table" style="width: 100%; border-collapse: collapse; margin-top: 15px;">
+                    <thead>
+                        <tr style="background-color: #f1f5f9; text-align: left;">
+                            <th style="padding: 12px; border: 1px solid #cbd5e1;">ชื่อไฟล์</th>
+                            <th style="padding: 12px; border: 1px solid #cbd5e1;">เวอร์ชันปัจจุบัน</th>
+                            <th style="padding: 12px; border: 1px solid #cbd5e1;">สถานะ</th>
+                            <th style="padding: 12px; border: 1px solid #cbd5e1;">จัดการเวอร์ชันย่อย</th>
+                            <th style="padding: 12px; border: 1px solid #cbd5e1;">การกระทำ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="file-list-tbody">
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 20px;">กำลังโหลดรายการไฟล์...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Form 4: เพิ่มและจัดการเพลงพื้นหลัง -->
+        <div class="admin-card" style="margin-top: 30px;">
+            <h2>4. จัดการเพลงพื้นหลัง (Background Music)</h2>
+            <form id="add-music-form" class="admin-form">
+                <div class="form-group">
+                    <label for="music-title">ชื่อเพลง / ศิลปิน</label>
+                    <input type="text" id="music-title" required placeholder="เช่น Lofi Chill Track 1">
+                </div>
+
+                <div class="form-group">
+                    <label for="music-url">ลิงก์ไฟล์เพลง Direct Link (.mp3)</label>
+                    <input type="url" id="music-url" required placeholder="https://example.com/song.mp3">
+                </div>
+
+                <div class="comment-form-footer">
+                    <button type="submit" id="btn-add-music" class="btn-submit-comment">บันทึกเพลงใหม่</button>
+                </div>
+            </form>
+
+            <h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 1.1rem; color: #0f172a;">รายการเพลงในระบบ</h3>
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse;">
+                    <thead>
+                        <tr style="background-color: #f1f5f9; text-align: left;">
+                            <th style="padding: 10px; border: 1px solid #cbd5e1;">ชื่อเพลง</th>
+                            <th style="padding: 10px; border: 1px solid #cbd5e1; width: 100px;">การกระทำ</th>
+                        </tr>
+                    </thead>
+                    <tbody id="music-list-tbody">
+                        <tr>
+                            <td colspan="2" style="text-align: center; padding: 15px;">กำลังโหลดรายการเพลง...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </main>
 
+    <!-- Modal สำหรับแก้ไขรายละเอียดไฟล์หลัก -->
+    <div id="edit-file-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); justify-content: center; align-items: center; z-index: 1000;">
+        <div class="admin-card" style="background: white; width: 90%; max-width: 500px; padding: 24px; border-radius: 8px;">
+            <h3 style="margin-bottom: 16px;">แก้ไขข้อมูลไฟล์</h3>
+            <form id="edit-file-form" class="admin-form">
+                <input type="hidden" id="edit-file-id">
+                
+                <div class="form-group">
+                    <label for="edit-file-title">ชื่อไฟล์ / ชื่อโปรแกรม</label>
+                    <input type="text" id="edit-file-title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-file-desc">รายละเอียดไฟล์</label>
+                    <textarea id="edit-file-desc" class="comment-textarea"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="edit-file-status">สถานะไฟล์</label>
+                    <select id="edit-file-status">
+                        <option value="new">🔥 อัปเดตใหม่ล่าสุด (New Update)</option>
+                        <option value="normal">✅ ปล่อยดาวน์โหลดปกติ (Normal)</option>
+                        <option value="maintenance">🛠️ กำลังอัปเดต / ปิดปรับปรุง (Maintenance)</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; gap: 10px; justify-content: flex-end; margin-top: 20px;">
+                    <button type="button" id="btn-close-modal" style="padding: 8px 16px; cursor: pointer; border: 1px solid #cbd5e1; background: #fff; border-radius: 4px;">ยกเลิก</button>
+                    <button type="submit" class="btn-submit-comment">บันทึกการแก้ไข</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- Music Player Floating Widget -->
+<div id="music-player-widget" style="position: fixed; bottom: 20px; right: 20px; background: #0f172a; color: #ffffff; padding: 10px 16px; border-radius: 30px; display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); z-index: 9999; font-family: sans-serif; font-size: 13px;">
+    <!-- ปุ่ม Play / Pause -->
+    <button id="btn-play-pause" type="button" style="background: #2563eb; border: none; color: white; width: 34px; height: 34px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; shrink: 0;">▶</button>
+    
+    <div style="display: flex; flex-direction: column; min-width: 120px; max-width: 160px;">
+        <!-- ชื่อเพลง -->
+        <span id="player-track-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-weight: 600; color: #f8fafc; font-size: 12px;">กำลังโหลดเพลง...</span>
+        
+        <!-- ตัวปรับระดับเสียง (Volume Slider) -->
+        <div style="display: flex; align-items: center; gap: 6px; margin-top: 3px;">
+            <span style="font-size: 11px;">🔉</span>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.15" style="width: 70px; height: 4px; cursor: pointer; accent-color: #3b82f6;">
+            <span style="font-size: 11px;">🔊</span>
+        </div>
+    </div>
+
+    <!-- ปุ่มเปลี่ยนเพลงถัดไป -->
+    <button id="btn-next-track" type="button" title="เพลงถัดไป" style="background: transparent; border: none; color: #94a3b8; cursor: pointer; font-size: 16px; padding: 4px;">⏭</button>
+    
+    <!-- Audio HTML Element -->
+    <audio id="bg-audio" loop></audio>
+</div>
+<!-- ย้ายออกนอกหน้าจอและทำขนาด 1x1px เพื่อให้ YouTube API ยอมทำงานเล่นเฉพาะเสียง -->
+<div id="youtube-hidden-player" style="position: absolute; width: 1px; height: 1px; left: -9999px; top: -9999px; opacity: 0; pointer-events: none;"></div>
     <script type="module" src="../js/firebase-config.js"></script>
     <script type="module" src="../js/auth.js"></script>
     <script type="module" src="../js/upload.js"></script>
+    <script type="module" src="../js/music-player.js"></script>
 </body>
 </html>
